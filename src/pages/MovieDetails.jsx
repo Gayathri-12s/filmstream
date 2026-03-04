@@ -11,6 +11,7 @@ export default function MovieDetails() {
   const [movie, setMovie] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [addedToWatchlist, setAddedToWatchlist] = useState(false);
 
   useEffect(() => {
 
@@ -85,7 +86,8 @@ export default function MovieDetails() {
         }
       );
 
-      alert("Added to Watchlist");
+      setAddedToWatchlist(true);
+      setTimeout(() => setAddedToWatchlist(false), 3000);
 
     } catch (error) {
       console.error("Watchlist error:", error);
@@ -100,19 +102,38 @@ export default function MovieDetails() {
 
   // Loading state
   if (loading) {
-    return <p className="text-center mt-5">Loading...</p>;
+    return (
+      <>
+        <Navbar />
+        <div className="container" style={{ 
+          display: "flex", 
+          justifyContent: "center", 
+          alignItems: "center", 
+          minHeight: "60vh" 
+        }}>
+          <div className="spinner"></div>
+        </div>
+      </>
+    );
   }
 
   // Error
   if (error) {
-    return <p className="text-center mt-5 text-danger">{error}</p>;
+    return (
+      <>
+        <Navbar />
+        <div className="container text-center" style={{ marginTop: "80px" }}>
+          <h2 className="text-danger">{error}</h2>
+        </div>
+      </>
+    );
   }
 
   return (
     <>
       <Navbar />
 
-      <div className="container mt-5 movie-details-clean">
+      <div className="container movie-details-clean">
 
         <div className="row align-items-center">
 
@@ -130,13 +151,55 @@ export default function MovieDetails() {
           {/* Info */}
           <div className="col-md-8">
 
-            <h1>{movie.title}</h1>
+            <h1 style={{ 
+              fontSize: "48px", 
+              fontWeight: "800",
+              marginBottom: "20px",
+              background: "linear-gradient(135deg, #f5f5f5 0%, #2dd881 100%)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              backgroundClip: "text"
+            }}>
+              {movie.title}
+            </h1>
 
             <p className="movie-meta-clean">
 
-              {movie.release_year || "N/A"} •
-              {movie.genre || "Movie"} •
-              ⭐ {movie.rating || "8.0"}
+              <span style={{ 
+                background: "linear-gradient(135deg, #ff6b35, #ff8555)",
+                padding: "6px 14px",
+                borderRadius: "8px",
+                fontSize: "14px",
+                fontWeight: "600"
+              }}>
+                {movie.release_year || "N/A"}
+              </span>
+
+              <span style={{ 
+                color: "#b8c5b8",
+                fontSize: "14px"
+              }}>
+                •
+              </span>
+
+              <span style={{ fontSize: "14px" }}>
+                {movie.genre || "Movie"}
+              </span>
+
+              <span style={{ 
+                color: "#b8c5b8",
+                fontSize: "14px"
+              }}>
+                •
+              </span>
+
+              <span style={{ 
+                color: "#ff6b35",
+                fontSize: "14px",
+                fontWeight: "600"
+              }}>
+                ⭐ {movie.rating || "8.0"}
+              </span>
 
             </p>
 
@@ -144,20 +207,38 @@ export default function MovieDetails() {
               {movie.description}
             </p>
 
-            <div className="mt-4">
+            <div className="mt-4" style={{ 
+              display: "flex", 
+              gap: "16px",
+              marginTop: "32px" 
+            }}>
 
               <button
-                className="btn btn-brand me-3"
+                className="btn btn-brand"
                 onClick={playMovie}
+                style={{ 
+                  display: "flex", 
+                  alignItems: "center", 
+                  gap: "8px",
+                  padding: "14px 28px",
+                  fontSize: "16px"
+                }}
               >
-                ▶ Play
+                ▶ Play Now
               </button>
 
               <button
-                className="btn btn-soft"
+                className={addedToWatchlist ? "btn btn-success" : "btn btn-soft"}
                 onClick={addToWatchlist}
+                style={{ 
+                  display: "flex", 
+                  alignItems: "center", 
+                  gap: "8px",
+                  padding: "14px 28px",
+                  fontSize: "16px"
+                }}
               >
-                + Watchlist
+                {addedToWatchlist ? "✓ Added" : "+ Watchlist"}
               </button>
 
             </div>

@@ -1,19 +1,27 @@
 import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 export default function HeroCarousel({ movies }) {
 
   const settings = {
-    dots: true,          // show dots
+    dots: true,
     infinite: true,
-    speed: 600,          // transition speed
+    speed: 800,
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 3000, // 3 seconds
+    autoplaySpeed: 4000,
     pauseOnHover: true,
     arrows: false,
-    adaptiveHeight: true
+    fade: true,
+    cssEase: "cubic-bezier(0.7, 0, 0.3, 1)"
   };
+
+
+  if (!movies || movies.length === 0) {
+    return null;
+  }
 
 
   return (
@@ -35,6 +43,42 @@ export default function HeroCarousel({ movies }) {
             <h1>{movie.title}</h1>
 
             <p>{movie.description}</p>
+
+            <div style={{ 
+              display: "flex", 
+              gap: "16px",
+              marginTop: "30px" 
+            }}>
+              
+              <button 
+                className="btn btn-brand"
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "10px",
+                  padding: "14px 32px",
+                  fontSize: "16px",
+                  fontWeight: "600"
+                }}
+              >
+                ▶ Watch Now
+              </button>
+
+              <button 
+                className="btn btn-soft"
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "10px",
+                  padding: "14px 32px",
+                  fontSize: "16px",
+                  fontWeight: "600"
+                }}
+              >
+                + My List
+              </button>
+
+            </div>
 
           </div>
 

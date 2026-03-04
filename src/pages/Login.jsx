@@ -48,7 +48,7 @@ export default function Login() {
     <div className="auth-page">
       <div className="auth-card">
 
-        <h2>Sign In</h2>
+        <h2>Welcome Back</h2>
 
         {errorMessage && (
           <div className="alert alert-danger">
@@ -58,28 +58,34 @@ export default function Login() {
 
         <input
           type="email"
-          className="form-control mb-3"
-          placeholder="Email"
+          className="form-control"
+          placeholder="Email address"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
 
         <input
           type="password"
-          className="form-control mb-4"
+          className="form-control"
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          onKeyDown={(e) => e.key === "Enter" && login()}
         />
 
         <button
           className="btn btn-brand w-100"
           onClick={login}
+          style={{ 
+            marginTop: "8px",
+            padding: "14px",
+            fontSize: "16px"
+          }}
         >
-          Login
+          Sign In
         </button>
 
-        <p className="text-center mt-3 auth-text">
+        <p className="text-center auth-text" style={{ marginTop: "24px" }}>
           New to FilmStream?{" "}
           <Link to="/signup" className="auth-link">
             Create Account

@@ -32,7 +32,7 @@ export default function Navbar({ onSearch }) {
 
 
   return (
-    <nav className="navbar navbar-ott">
+    <nav className="navbar-ott">
 
       {/* Left */}
       <div className="nav-left">
@@ -104,11 +104,17 @@ export default function Navbar({ onSearch }) {
 
           <div className="profile-dropdown">
 
-            <p onClick={() => navigate("/history")}>
+            <p onClick={() => {
+              navigate("/history");
+              setOpen(false);
+            }}>
               Watch History
             </p>
 
-            <p onClick={() => navigate("/change-password")}>
+            <p onClick={() => {
+              navigate("/change-password");
+              setOpen(false);
+            }}>
               Change Password
             </p>
 

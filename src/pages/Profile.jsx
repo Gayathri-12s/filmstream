@@ -1,34 +1,64 @@
 import Navbar from "../components/Navbar";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Profile() {
+  const navigate = useNavigate();
+
   return (
     <>
       <Navbar />
 
-      <div className="container mt-5" style={{ maxWidth: "500px" }}>
+      <div className="container" style={{ 
+        maxWidth: "600px",
+        marginTop: "60px"
+      }}>
+        
         <div className="profile-box">
-          <h3 className="mb-4">My Profile</h3>
+          
+          <h3 style={{ 
+            marginTop: "0",
+            marginBottom: "30px",
+            fontSize: "32px",
+            textAlign: "center"
+          }}>
+            My Profile
+          </h3>
 
           <div className="d-grid gap-3">
-            <Link to="/change-password" className="btn btn-outline-light">
+            
+            <Link 
+              to="/change-password" 
+              className="btn-outline-light"
+            >
               Change Password
             </Link>
 
-            <Link to="/history" className="btn btn-outline-light">
+            <Link 
+              to="/history" 
+              className="btn-outline-light"
+            >
               Watch History
+            </Link>
+
+            <Link 
+              to="/watchlist" 
+              className="btn-outline-light"
+            >
+              My Watchlist
             </Link>
 
             <button
               className="btn btn-danger"
               onClick={() => {
-                localStorage.removeItem("user");
-                window.location.href = "/login";
+                localStorage.removeItem("token");
+                navigate("/login");
               }}
             >
               Logout
             </button>
+            
           </div>
+
         </div>
       </div>
     </>

@@ -53,7 +53,7 @@ export default function Signup() {
     <div className="auth-page">
       <div className="auth-card">
 
-        <h2>Create Account</h2>
+        <h2>Join FilmStream</h2>
 
         {errorMessage && (
           <div className="alert alert-danger">
@@ -63,23 +63,23 @@ export default function Signup() {
 
         <input
           type="text"
-          className="form-control mb-3"
-          placeholder="Name"
+          className="form-control"
+          placeholder="Full name"
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
 
         <input
           type="email"
-          className="form-control mb-3"
-          placeholder="Email"
+          className="form-control"
+          placeholder="Email address"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
 
         <input
           type="password"
-          className="form-control mb-3"
+          className="form-control"
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
@@ -87,23 +87,29 @@ export default function Signup() {
 
         <input
           type="password"
-          className="form-control mb-4"
-          placeholder="Confirm Password"
+          className="form-control"
+          placeholder="Confirm password"
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
+          onKeyDown={(e) => e.key === "Enter" && register()}
         />
 
         <button
           className="btn btn-brand w-100"
           onClick={register}
+          style={{ 
+            marginTop: "8px",
+            padding: "14px",
+            fontSize: "16px"
+          }}
         >
-          Sign Up
+          Create Account
         </button>
 
-        <p className="text-center mt-3 auth-text">
+        <p className="text-center auth-text" style={{ marginTop: "24px" }}>
           Already have an account?{" "}
           <Link to="/login" className="auth-link">
-            Login
+            Sign In
           </Link>
         </p>
 

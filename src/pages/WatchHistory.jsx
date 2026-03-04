@@ -2,10 +2,11 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Navbar from "../components/Navbar";
+import MovieCard from "../components/MovieCard";
 
 export default function WatchHistory() {
-
   const [history, setHistory] = useState([]);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -13,9 +14,7 @@ export default function WatchHistory() {
   }, []);
 
   const fetchHistory = async () => {
-
     try {
-
       const token = localStorage.getItem("token");
 
       const response = await axios.get(
@@ -28,81 +27,57 @@ export default function WatchHistory() {
       );
 
       setHistory(response.data);
-
     } catch (error) {
       console.error("Failed to load watch history", error);
+    } finally {
+      setLoading(false);
     }
   };
 
-
-  // Convert ISO date → readable format
-  const formatDate = (dateString) => {
-
-    const date = new Date(dateString);
-
-    return date.toLocaleDateString("en-IN", {
-      day: "numeric",
-      month: "short",
-      year: "numeric"
-    });
-  };
-
+  if (loading) {
+    return (
+      <>
+        <Navbar />
+        <div className="container" style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          minHeight: "60vh"
+        }}>
+          <div className="spinner"></div>
+        </div>
+      </>
+    );
+  }
 
   return (
     <>
       <Navbar />
 
-      <div className="container mt-4">
+      <div className="container">
         <h3>Continue Watching</h3>
 
         {history.length === 0 ? (
-
-          <p className="text-muted mt-3">
-            No watch history yet
-          </p>
-
-        ) : (
-
-          <div className="movie-row mt-3">
-
-            {history.map(item => (
-
-              <div
-                key={item.id}
-                className="ott-card"
-                style={{ width: "180px", cursor: "pointer" }}
-
-                onClick={() =>
-                  navigate(`/movie/${item.movie.id}`)
-                }
-              >
-
-                <img
-                  src={item.movie.thumbnail}
-                  className="movie-poster"
-                  alt={item.movie.title}
-                />
-
-                <div className="p-2">
-
-                  <p className="mb-1">
-                    {item.movie.title}
-                  </p>
-
-                  <small className="text-muted">
-                    Watched on {formatDate(item.watched_at)}
-                  </small>
-
-                </div>
-
-              </div>
-
-            ))}
-
+          <div className="empty-state">
+            <p>No watch history yet</p>
+            <button
+              className="btn btn-brand"
+              onClick={() => navigate("/home")}
+            >
+              Start Watching
+            </button>
           </div>
-
+        ) : (
+          <div className="movie-row">
+            {history.map(item => (
+              <MovieCard
+                key={item.id}
+                movie={item.movie}
+                showDelete={false}
+              />
+            ))}
+          </div>
         )}
-
       </div>
     </>
   );
