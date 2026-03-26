@@ -1,135 +1,99 @@
-# FilmStream - Movie Streaming Platform
+# 🎬 FilmStream Backend – Django & MySQL
 
-A full-stack web application where users can discover, stream, and manage movies. Built with Django (backend) and React (frontend).
-
-## 📌 What is FilmStream?
-
-FilmStream is a movie streaming platform with two main parts:
-
-1. **User Application** - Browse movies, create watchlists, track watch history
-2. **Admin Dashboard** - Manage movies and monitor user activity
-
-Backend Repository: [https://github.com/Gayathri-12s/admin_project.git]
-Frontend Repository: [https://github.com/Gayathri-12s/filmstream.git]
-
-## 💡 Key Features
-
-### For Users
-- Sign up and login
-- Browse and search movies
-- View movie details
-- Create and manage a personal watchlist
-- Track watch history
-- Update profile and password
-
-### For Admins
-- Add, edit, and delete movies
-- View registered users
-- Monitor user activity and watch history
-- Generate reports
-
-## 🛠️ Technology Stack
-
-| Component | Technology |
-|-----------|-----------|
-| Frontend | React with Vite |
-| Backend | Django & Django REST Framework |
-| Database | SQLite |
-| Styling | CSS |
-
-## 📂 Project Structure
-
-```
-FINAL PROJECT/
-├── ADMIN/               → Django Backend
-│   └── admin_project/
-├── USER/                → React Frontend
-│   └── filmstream/
-└── README.md            → This file
-```
-
-## 🚀 Quick Start
-
-### Backend Setup
-
-```bash
-cd "FINAL PROJECT/ADMIN/admin_project"
-
-# Create virtual environment
-python -m venv venv
-venv\Scripts\activate
-
-# Install dependencies
-pip install django djangorestframework django-cors-headers
-
-# Apply database migrations
-python manage.py migrate
-
-# Create admin user
-python manage.py createsuperuser
-
-# Run server
-python manage.py runserver
-```
-
-Backend runs at: `http://localhost:8000`
-
-### Frontend Setup
-
-```bash
-cd "FINAL PROJECT/USER/filmstream"
-
-# Install dependencies
-npm install
-
-# Run development server
-npm run dev
-```
-
-Frontend runs at: `http://localhost:5173`
-
-## 📋 Main Pages & Features
-
-### User Interface
-- **Landing Page** - Welcome screen for new users
-- **Login/Signup** - User authentication
-- **Home** - Browse and discover movies
-- **Movie Details** - View full movie information
-- **Watchlist** - Saved movies
-- **Watch History** - Previously watched movies
-- **Profile** - User settings and password change
-
-### Admin Dashboard
-- **Dashboard** - Overview and statistics
-- **Movie Management** - Add, edit, delete movies
-- **Users Management** - View all registered users
-- **Reports** - View user engagement and activity
-
-## 🔄 How It Works
-
-1. User creates account and logs in through React frontend
-2. Frontend sends request to Django backend API
-3. Backend validates user credentials and returns authentication token
-4. User can now access personalized features (watchlist, history)
-5. Admin can manage content through the admin dashboard
-
-## 📖 Running the Application
-
-1. **Start Backend**: Open PowerShell, navigate to admin_project, run `python manage.py runserver`
-2. **Start Frontend**: Open another PowerShell, navigate to filmstream, run `npm run dev`
-3. **Open Browser**: Visit `http://localhost:5173` for the user app
-4. **Admin Panel**: Visit `http://localhost:8000/admin` with admin credentials
-
-## 📝 Project Highlights
-
-✅ Clean, modular code structure  
-✅ Responsive design for all devices  
-✅ Secure authentication system  
-✅ Separate user and admin interfaces  
-✅ RESTful API architecture  
-✅ Reusable React components  
+This repository contains the backend of the FilmStream OTT platform built using Django and MySQL.  
+It is responsible for handling business logic, managing movie data, and serving APIs to the frontend.
 
 ---
 
-**Built by**: [Your Name]  
-**Date**: March 2026
+##  Features
+
+- CRUD operations for movie/content management  
+- Separate Django apps for modular design (`admin_app`, `user_api`)  
+- API endpoints for frontend integration  
+- Admin panel using Django Admin  
+- MySQL database integration using Django ORM  
+
+---
+
+##  Tech Stack
+
+- Django  
+- MySQL  
+- Django ORM  
+
+---
+
+##  Project Structure
+
+admin_project/
+│
+├── admin_app/ # Admin-side functionality
+│ ├── migrations/
+│ ├── static/
+│ ├── templates/
+│ ├── models.py
+│ ├── views.py
+│ ├── admin.py
+│ └── apps.py
+│
+├── user_api/ # User-facing APIs
+│ ├── migrations/
+│ ├── models.py
+│ ├── serializers.py
+│ ├── views.py
+│ ├── urls.py
+│ └── apps.py
+│
+├── admin_project/
+│ ├── settings.py # Configuration (MySQL setup)
+│ ├── urls.py # Root URL routing
+│ ├── asgi.py
+│ └── init.py
+│
+├── manage.py
+
+
+---
+
+##  API Overview (User API)
+
+The `user_api` app provides endpoints used by the frontend:
+
+- GET /movies → Fetch all movies  
+- GET /movies/:id → Fetch movie details  
+- POST /movies → Add new movie  
+- PUT /movies/:id → Update movie  
+- DELETE /movies/:id → Delete movie  
+
+
+##  Setup Instructions
+
+### 1️⃣ Create Virtual Environment
+
+python -m venv venv
+venv\Scripts\activate
+2️⃣ Install Dependencies
+pip install -r requirements.txt
+3️⃣ Configure MySQL Database
+
+Update settings.py:
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'your_db_name',
+        'USER': 'root',
+        'PASSWORD': '',
+        'HOST': 'localhost',
+        'PORT': '3306',
+               }
+            }
+4️⃣ Run Migrations
+python manage.py makemigrations
+python manage.py migrate
+5️⃣ Run Server
+python manage.py runserver
+🔗 Related Project
+
+Frontend (React):
+  https://github.com/Gayathri-12s/filmstream
