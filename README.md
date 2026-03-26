@@ -1,99 +1,98 @@
-# 🎬 FilmStream Backend – Django & MySQL
+#  FilmStream – Full Stack OTT Streaming Platform
 
-This repository contains the backend of the FilmStream OTT platform built using Django and MySQL.  
-It is responsible for handling business logic, managing movie data, and serving APIs to the frontend.
+FilmStream is a full-stack OTT (Over-The-Top) streaming web application built using React for the frontend and Django for the backend, with MySQL as the database.
 
----
-
-##  Features
-
-- CRUD operations for movie/content management  
-- Separate Django apps for modular design (`admin_app`, `user_api`)  
-- API endpoints for frontend integration  
-- Admin panel using Django Admin  
-- MySQL database integration using Django ORM  
+The application allows users to browse movies, view details, and interact with dynamically loaded content through API integration.
 
 ---
 
-##  Tech Stack
+##  Key Features
 
-- Django  
-- MySQL  
-- Django ORM  
+###  User Features
+- Browse movies and view details  
+- Dynamic content rendering using API data  
+- Client-side routing with React Router  
+- Responsive UI design  
+
+###  Backend Integration
+- Fetch data from Django backend APIs  
+- Display real-time movie data in UI  
+- Structured API communication  
+
+---
+
+##  System Architecture
+
+React Frontend → Django Backend → MySQL Database  
+
+- React sends HTTP requests to backend APIs  
+- Django processes data and interacts with MySQL  
+- JSON responses are rendered dynamically in UI  
+
+---
+
+## 🛠️ Tech Stack
+
+| Layer       | Technologies Used |
+|------------|------------------|
+| Frontend   | React (Vite), React Router, CSS |
+| Backend    | Django |
+| Database   | MySQL |
 
 ---
 
 ##  Project Structure
+src/
+│
+├── components/
+│ ├── Navbar.jsx
+│ ├── MovieCard.jsx
+│ ├── MovieRow.jsx
+│ ├── HeroCarousel.jsx
+│ └── Footer.jsx
+│
+├── pages/
+│ ├── Home.jsx
+│ ├── MovieDetails.jsx
+│ ├── Login.jsx
+│ ├── Landing.jsx
+│ └── ChangePassword.jsx
+│
+├── App.jsx
+├── AppRoutes.jsx
+└── main.jsx
 
-admin_project/
-│
-├── admin_app/ # Admin-side functionality
-│ ├── migrations/
-│ ├── static/
-│ ├── templates/
-│ ├── models.py
-│ ├── views.py
-│ ├── admin.py
-│ └── apps.py
-│
-├── user_api/ # User-facing APIs
-│ ├── migrations/
-│ ├── models.py
-│ ├── serializers.py
-│ ├── views.py
-│ ├── urls.py
-│ └── apps.py
-│
-├── admin_project/
-│ ├── settings.py # Configuration (MySQL setup)
-│ ├── urls.py # Root URL routing
-│ ├── asgi.py
-│ └── init.py
-│
-├── manage.py
+##  Backend Repository
 
+Backend (Django):  
+ https://github.com/Gayathri-12s/admin_project
 
 ---
 
-##  API Overview (User API)
+## Setup Instructions
 
-The `user_api` app provides endpoints used by the frontend:
+### 1️⃣ Clone Repository
 
-- GET /movies → Fetch all movies  
-- GET /movies/:id → Fetch movie details  
-- POST /movies → Add new movie  
-- PUT /movies/:id → Update movie  
-- DELETE /movies/:id → Delete movie  
+git clone https://github.com/Gayathri-12s/filmstream.git
+cd filmstream
 
-
-##  Setup Instructions
-
-### 1️⃣ Create Virtual Environment
-
-python -m venv venv
-venv\Scripts\activate
 2️⃣ Install Dependencies
-pip install -r requirements.txt
-3️⃣ Configure MySQL Database
+npm install
+3️⃣ Run Application
+npm run dev
 
-Update settings.py:
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'your_db_name',
-        'USER': 'root',
-        'PASSWORD': '',
-        'HOST': 'localhost',
-        'PORT': '3306',
-               }
-            }
-4️⃣ Run Migrations
-python manage.py makemigrations
-python manage.py migrate
-5️⃣ Run Server
-python manage.py runserver
-🔗 Related Project
+📌 Key Concepts Demonstrated:
+Component-based architecture in React
+Client-side routing using React Router
+API integration with backend
+Dynamic rendering of data
+Separation of UI components and pages
 
-Frontend (React):
-  https://github.com/Gayathri-12s/filmstream
+ Future Improvements:
+
+Add search and filtering functionality
+Implement authentication (login/signup)
+Add pagination
+Improve UI/UX design
+Deploy application
